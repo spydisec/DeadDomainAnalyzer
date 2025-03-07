@@ -1,0 +1,106 @@
+# General Settings
+dry_run: false               # Process only first 100 domains
+max_attempts: 2              # Retries per domain
+concurrency: 200              # Parallel queries
+timeout: 10                  # Seconds per query
+
+# Input Configuration
+inputs:
+  - name: "ads"
+    path: "./domainlist/unique_advtracking_domains.txt"
+#  - name: "malicious"
+#    path: "./domainlist/unique_malicious_domains.txt"
+#  - name: "spam"
+#    path: "./domainlist/unique_spamscamabuse_domains.txt"
+#  - name: "maltail"
+#    path: "./domainlist/domain_ioc_maltrail.txt"
+
+statistics:
+  directory: "./statistics"
+  output_file: "doh_stats.csv"
+  working_file: "current_stats.json"
+
+progress:
+  mininterval: 0.5 # Minimum time (sec) between progress bar refreshes; set 1 for 1 second if preferred
+
+#progress:
+#  enabled: true
+#  style: counter            # Options: bar, percentage, counter
+#  update_interval: 0.2  # Update every 100ms
+#  log_file: "./logs/progress.log"
+  # style: percentage  # Simple percentage display
+  # style: counter     # Count of processed domains
+
+
+# Output Configuration
+outputs:
+  directory: "./outputs"
+  enabled:
+    dead: true               # NXDOMAIN results
+    errors: true             # Generic errors
+    servfail: true           # SERVFAIL results
+    alive: false             # Working domains
+  filenames:
+    dead: "dead_domains.txt"
+    errors: "error_domains.txt"
+    servfail: "servfail_domains.txt"
+    alive: "alive_domains.txt"
+
+# Resolver Configuration
+resolvers:
+  doh:
+    - "doh.dns.sb"
+    - "doh.libredns.gr"
+    - "doh.applied-privacy.net"
+    - "dns.quad9.net"
+    - "dns.bitdefender.net"
+    - "dns.google"
+    - "doh.seby.io"
+    - "doh.mullvad.net"
+    - "syd01.dnscry.pt"
+    - "syd02.dnscry.pt"
+    - "tlv01.dnscry.pt"
+    - "anycast.uncensoreddns.org"
+    - "dnspub.restena.lu"
+    - "doh.ffmuc.net"
+    - "unicast.uncensoreddns.org"
+    - "renardbleu.dev"
+    - "opennic2.eth-services.de"
+    - "doh.kekew.info"
+    - "dns.froth.zone"
+    - "common.dot.dns.yandex.net"
+    - "ns1.opennameserver.org"
+    - "ns.opennameserver.org"
+    - "ns4.opennameserver.org"
+    - "ns3.opennameserver.org"
+    - "ns2.opennameserver.org"
+    - "unfiltered.adguard-dns.com"
+    - "doh.qis.io"
+    - "dns.rabbitdns.org"
+    - "dns.switch.ch"
+    - "resolver.dnsprivacy.org.uk"
+    - "uncensored.dns.dnswarden.com"
+    - "dns.pumplex.com"
+
+dns:                              # Normal DNS and root servers
+    - "198.41.0.4"                  # Example root server (A-root)
+    - "170.247.170.2"                  # Example root server (A-root)
+    - "192.33.4.12"                  # Example root server (A-root)                                                                  
+    - "199.7.91.13"                  # Example root server (A-root)                                                                  
+    - "192.203.230.10"                  # Example root server (A-root)                                                                  
+    - "192.112.36.4"                  # Example root server (A-root)                                                                  
+    - "192.5.5.241"                  # Example root server (A-root)                                                                  
+    - "198.97.190.53"                  # Example root server (A-root)                                                                  
+    - "192.36.148.17"                  # Example root server (A-root)
+    - "192.58.128.30"                  # Example root server (A-root)
+    - "193.0.14.129"                  # Example root server (A-root)11
+    - "199.7.83.42"                  # Example root server (A-root)11
+    - "202.12.27.33"                  # Example root server (A-root)11
+# Logging Configuration
+logging:
+  enabled: false # Set to false to disable logging entirely
+  console: false    # Disable console logs if using progress bar
+  directory: "./logs"
+  level: "INFO"              # DEBUG/INFO/WARNING/ERROR
+  max_size: "10MB"           # Log rotation
+  backups: 5
